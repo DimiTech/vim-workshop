@@ -1,0 +1,8 @@
+# Why vim?
+
+- Extremely efficient text editing
+    - No need to use the mouse/touchpad
+    - Macros
+- Commands are (mostly) easy to remember
+- GPL-compatible license (free & open-source)
+- Installed everywhere by default

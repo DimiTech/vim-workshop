@@ -1,28 +1,29 @@
 ---
-title: vim workshop
+title: vim workshop - part I
 subtitle:
 - efficient text editing inside the terminal
 theme: Singapore
 fonttheme: professionalfonts
 fontsize: 15
 author:
-- Branko (@branko)
+- Branko (@branquito on Twitter)
 - Dušan (dusandimitric.com)
 ---
 
 # Why vim?
 
-![Vim Logo](./images/vimlogo.png "Vim Logo"){ width=20% }\
+![Vim Logo](./images/vimlogo.png "Vim Logo"){ width=22% }\
+
 
 - Extremely efficient text editing
     - No need to use the mouse/touchpad
     - Macros
 - Commands are (mostly) easy to remember
-- Learn something new every day ???
+- You get to learn something new every day
 - GPL-compatible license (free & open-source)
 - Installed everywhere by default
 
-# Basics
+# Getting your feet wet
 
 **Opening files:**
 
@@ -32,9 +33,10 @@ $ vim file
 
 ```
 i              - Insert text before the cursor
-<Esc> <C-[>    - Return to normal mode
+<Esc> <C-[>    - Return to NORMAL mode
 :w[rite]       - Write buffer to file
 :q[uit]        - Terminate current window
+:x ZZ          - Save & Close current buffer
 :qa! :quitall! - Close all buffers and exit without saving
 :wqa :xa       - Save & Close all buffers and exit
 ```
@@ -64,11 +66,11 @@ gE - backwards to end of word (skips non-word characters)
 
 **Horizontal jumps:**
 ```
-^  - Move to the first non-blank character of the line
-$  - Move To the end of the line
-0  - Move to the first character of the line
-g_ - Move to the last non-blank character of the line
-n| - Move to column (not a pipe!)
+^    - move to the first non-blank character of the line
+$    - move to the end of the line
+0    - move to the first character of the line
+g_   - move to the last non-blank character of the line
+[n]| - move to column [n] (not a pipe!)
 ```
 
 # Horizontal motions (2)
@@ -88,18 +90,26 @@ T{char} - move 'till next occurence of {char} to the left
 > **`[count]` modifier can prefix most vim commands!**
 
 ```
-[count]j - Move [count] lines down ↓
-[count]k - Move [count] lines up   ↑
-:[line]  - Goto [line]
-[line]gg - Goto [line] (goes to first line by default)
-[line]G  - Goto [line] (goes to last line by default)
-{count}% - Goto {count} percentage in the file
+[count]j - move [count] lines down ↓
+[count]k - move [count] lines up   ↑
+:[line]  - goto [line]
+[line]gg - goto [line] (goes to first line by default)
+[line]G  - goto [line] (goes to last line by default)
+{count}% - goto {count} percentage in the file
 } - next paragraph
 { - previous paragraph
-% - Jump to matching ({[<
+% - jump to matching ({[<
 ```
 
 # Vertical motions (2)
+
+```
+[count]H - home   line of window + [count]
+       M - middle line of window
+[count]L - last   line of window - [count]
+```
+
+# Vertical motions (3)
 
 ## Scrolling
 
@@ -110,19 +120,144 @@ CTRL-D - half-page down
 CTRL-U - half-page up
 CTRL-F - 1 page down
 CTRL-B - 1 page up
-```
-
-# Vertical motions (3)
-
-```
-[count]H - Home   line of window + [count]
-       M - Middle line of window
-[count]L - Last   line of window - [count]
-                 
 
 zt - put current line to the top    of the window
 zz - put current line to the middle of the window
 zb - put current line to the bottom of the window
+```
+
+# Modes
+
+**vim** is a **modal** editor and it has six BASIC modes:
+
+- **Normal** (**command**) mode
+- **Insert** mode
+- **Visual** mode
+- **Comman-line** (**cmdline**) mode
+- **Select** mode \*
+- **Ex** mode \*
+
+\* - not widely used
+
+# Input commands
+
+```
+i       - insert before cursor
+I, ^i   - insert before first non-blank in the line
+gI      - insert at column 1
+a       - append after cursor
+A, $a   - append at the end of the line
+o       - open line below
+O       - open line above
+:r file - insert file after cursor line
+```
+
+Insert commands put **vim** in **INSERT** mode.
+
+# Change commands
+
+```
+cw      - change until the end of word
+caw     - change a whole word
+ciw     - change a whole word (whithout whitespace)
+C, c$   - change to end of line
+rc      - replace character under cursor with 'c'
+R       - replace by overwriting
+s       - substitute 1 character with string
+S       - substitute the whole line with text
+.       - repeat last change
+```
+
+Change commands put changed text to **unnamed register ""**.
+
+# Delete commands
+
+```
+x       - delete character
+d[n]w   - delete [n] words
+db      - delete previous word
+d)      - delete to end of sentence
+D       - delete to end of line
+[n]dd   - delete [n] lines
+dj, dk  - delete current line and the line below / above
+:10,20d [register] - delete lines 10-20 and put them
+                     in [register]
+:%d     - empty the whole buffer
+```
+
+Delete commands put deleted text to **unnamed register ""**.
+
+# Copying and pasting text
+
+```
+y{motion} - yank {motion} text (yiw, yg_, yj, yk)
+Y, yy     - yank the entire line
+yip, yap  - yank paragraph
+:%y       - yank the entire buffer
+p         - put text from unnamed buffer after  cursor
+P         - put text from unnamed buffer before cursor
+gp        - same as p, but leaves cursor after new text
+gP        - same as P, but leaves cursor after new text
+```
+
+Copy text from one place to another - get text into a **register** using **yank**, **delete** or **change**, then insert the **register** contents with a **put** command.
+
+# Registers
+
+The **unnamed register ""** is being used by default.
+
+**Named registers "a to "z or "A to "Z** registers are only filled by the user.
+
+```
+:reg[isters]   - list registers and their content
+"{a-zA-Z0-9+"} - use register (:h copy-move)
+:h copy-move   - help page for copying into registers
+```
+
+```
+"_{command}  - black hole register (_dd for example)
+:h registers - more information on registers
+```
+
+# VISUAL mode
+
+```
+v - per-character  VISUAL mode
+V - linewise       VISUAL mode
+```
+
+Most NORMAL mode operators can be used in VISUAL mode.
+
+Some useful operators:
+
+```
+: - start Ex command for higlighted lines
+r - replace with character
+u, U, ~ - lowercase, uppercase, toggle case
+```
+
+Blockwise VISUAL mode:
+```
+CTRL-V - start blockwise VISUAL mode
+v_b_I  - insert
+v_b_A  - append
+```
+
+# Undoing & Redoing changes
+
+```
+u      - undo
+CTRL-R - redo
+TODO: What to add?
+```
+# Miscelaneous
+```
+J       - join lines
+>>      - shift right
+<<      - shift left
+CTRL+L  - redraw
+CTRL+A  - increment number under cursor or next on the line
+CTRL+X  - decrement number under cursor or next on the line
 ```
 
 # Jumps & jump lists
@@ -133,3 +268,88 @@ CTRL-O   - Go to older cursor position in jump list
 CTRL-I   - Go to newer cursor position in jump list
 ```
 
+# Markers
+
+```
+TODO: Add markers
+'' - TODO: Add description
+```
+
+# Text object selection
+
+These commands can only be used while in VISUAL mode or after an operator.
+
+:h text-object
+
+
+:h copy-move
+:h keycode
+
+# Buffers
+
+```
+:e <filename> - open a new file for editing
+
+:buffers[!] :ls[!] - Show all buffers
+:b[uffer][N]       - Switch to buffer [N]
+:sb[uffer][N]      - Open buffer [N] in new window
+:bw[ipe]     - Wipe out a buffer
+:%bw[ipeout] - Wipe out all buffers
+[N] CTRL-^ - 
+
+%, #
+```
+
+```
+<S-...>         shift-key                       shift <S-
+<C-...>         control-key                     control ctrl <C-
+<M-...>         alt-key or meta-key             meta alt <M-
+<A-...>         same as <M-...>                 <A-
+<D-...>         command-key (Macintosh only)    <D-
+```
+
+# Important takeaways
+
+![Vim Logo](./images/vimlogo.png "Vim Logo"){ width=20% }\
+
+- vim is all about efficiency
+
+# Ubaciti: {.allowframebreaks}
+
+- q:, :<C-f>  - CTRL-C to copy to command line
+- q/, q:/
+- q?, q:?
+- :CTRL+F - see how this is called
+- :help
+- buffers
+- provjeri sta je gcn
+- Kopiranje iz i u OS clipboard
+- basic .vimrc
+- search, search-replace
+- windowing
+  - vsp, sp, new, vnew
+  - Use fake cases:
+    - Comparing parts of the same file (recimo da imas test a pises novi pa oces da vidis kako se pise)
+- terminal
+  - :term
+  - :sh
+- :r !ls - read the output of a command
+- :4copy. :4t. ( 4 to . ) :-4,-2t. 
+
+Vim problems:
+  - Integrated debugging
+  - Project-wide Search & Replace
+  - Working with Enterprise Java
+  - Opening large files - like SQL dumps
+  - Vimdiff kind of clunky?
+
+Cool commands:
+  - :%!xxd - convert ASCII to hex
+
+# WORKSHOP #2 - Programming
+- Explore vim marks?
+- Search for term in visual select? (find out how to)
+- folding
+  - javascript syntax
+- [[ jump to function start
+- external output command to quickfix => :!ls > copen

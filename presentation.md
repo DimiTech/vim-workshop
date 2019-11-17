@@ -12,12 +12,16 @@ author:
 
 # Why vim?
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 ![Vim Logo](./images/vimlogo.png "Vim Logo"){ width=22% }\
 
 
 - Extremely efficient text editing
+    - Designed to deal with text
     - No need to use the mouse/touchpad
-    - Macros
+    - Macroing, RegExp, Marks, Registers, Tab Sessions...
+- Highly composable
+- Lightweight (therefore fast)
 - Commands are (mostly) easy to remember
 - You get to learn something new every day
 - GPL-compatible license (free & open-source)
@@ -43,7 +47,6 @@ i              - Insert text before the cursor
 
 ```
                  Basic movement:
-
                         ↑
                         k
                     ← h   l →
@@ -142,14 +145,15 @@ zb - put current line to the bottom of the window
 # Input commands
 
 ```
-i       - insert before cursor
-I, ^i   - insert before first non-blank in the line
-gI      - insert at column 1
-a       - append after cursor
-A, $a   - append at the end of the line
-o       - open line below
-O       - open line above
-:r file - insert file after cursor line
+i         - insert before cursor
+I, ^i     - insert before first non-blank in the line
+gI        - insert at column 1
+a         - append after cursor
+A, $a     - append at the end of the line
+o         - open line below
+O         - open line above
+:r file   - insert file after cursor line
+:r ![cmd] - insert output of a command [cmd]
 ```
 
 Insert commands put **vim** in **INSERT** mode.
@@ -166,9 +170,11 @@ R       - replace by overwriting
 s       - substitute 1 character with string
 S       - substitute the whole line with text
 .       - repeat last change
+u       - undo
+CTRL-R  - redo
 ```
 
-Change commands put changed text to **unnamed register ""**.
+Change commands put changed text to **unnamed register \"\"**.
 
 # Delete commands
 
@@ -185,7 +191,7 @@ dj, dk  - delete current line and the line below / above
 :%d     - empty the whole buffer
 ```
 
-Delete commands put deleted text to **unnamed register ""**.
+Delete commands put deleted text to **unnamed register \"\"**.
 
 # Copying and pasting text
 
@@ -204,9 +210,9 @@ Copy text from one place to another - get text into a **register** using **yank*
 
 # Registers
 
-The **unnamed register ""** is being used by default.
+The **unnamed register \"\"** is being used by default.
 
-**Named registers "a to "z or "A to "Z** registers are only filled by the user.
+**Named registers \"a to \"z or \"A to \"Z** registers are only filled by the user.
 
 ```
 :reg[isters]   - list registers and their content
@@ -243,22 +249,28 @@ v_b_I  - insert
 v_b_A  - append
 ```
 
-# Undoing & Redoing changes
-
-```
-u      - undo
-CTRL-R - redo
-TODO: What to add?
-```
 # Miscelaneous
 ```
+CTRL+L  - redraw
 J       - join lines
 >>      - shift right
 <<      - shift left
-CTRL+L  - redraw
 CTRL+A  - increment number under cursor or next on the line
 CTRL+X  - decrement number under cursor or next on the line
+
+:h[elp]
 ```
+
+# Important takeaways
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![Vim Logo](./images/vimlogo.png "Vim Logo"){ width=22% }\
+
+
+  - use the least number of keystrokes possible
+  - if you're holding a key, you're probably doing something wrong
+  - use the built-in help, it's very good
+  - use cheat-sheets when learning, there are many online
 
 # Jumps & jump lists
 
@@ -301,6 +313,7 @@ These commands can only be used while in VISUAL mode or after an operator.
 ```
 
 ```
+For reading the documentation:
 <S-...>         shift-key                       shift <S-
 <C-...>         control-key                     control ctrl <C-
 <M-...>         alt-key or meta-key             meta alt <M-
@@ -308,24 +321,17 @@ These commands can only be used while in VISUAL mode or after an operator.
 <D-...>         command-key (Macintosh only)    <D-
 ```
 
-# Important takeaways
-
-![Vim Logo](./images/vimlogo.png "Vim Logo"){ width=20% }\
-
-- vim is all about efficiency
-
 # Ubaciti: {.allowframebreaks}
 
+- Kopiranje iz i u OS clipboard
+- search, search-replace
 - q:, :<C-f>  - CTRL-C to copy to command line
 - q/, q:/
 - q?, q:?
-- :CTRL+F - see how this is called
 - :help
-- buffers
-- provjeri sta je gcn
-- Kopiranje iz i u OS clipboard
+- gcn
 - basic .vimrc
-- search, search-replace
+- buffers
 - windowing
   - vsp, sp, new, vnew
   - Use fake cases:
@@ -333,10 +339,10 @@ These commands can only be used while in VISUAL mode or after an operator.
 - terminal
   - :term
   - :sh
-- :r !ls - read the output of a command
 - :4copy. :4t. ( 4 to . ) :-4,-2t. 
 
 Vim problems:
+
   - Integrated debugging
   - Project-wide Search & Replace
   - Working with Enterprise Java
@@ -344,12 +350,22 @@ Vim problems:
   - Vimdiff kind of clunky?
 
 Cool commands:
+
   - :%!xxd - convert ASCII to hex
 
 # WORKSHOP #2 - Programming
-- Explore vim marks?
-- Search for term in visual select? (find out how to)
+- Marks?
+- Search/Replace term in visual select?
 - folding
   - javascript syntax
+  - python syntax
+  - C syntax
 - [[ jump to function start
 - external output command to quickfix => :!ls > copen
+
+
+## Working with multiple files
+```
+$ vim -p *.c
+$ tabdo %s/text/burazenger/g
+```

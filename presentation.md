@@ -16,7 +16,7 @@ author:
 ![Vim Logo](./images/vimlogo.png "Vim Logo"){ width=22% }\
 
 
-- Extremely efficient text editing
+- Extremely efficient text editing mouse/touchpad
     - Designed to deal with text
     - No need to use the mouse/touchpad
     - Macroing, RegExp, Marks, Registers, Tab Sessions...
@@ -29,10 +29,22 @@ author:
 
 # Getting your feet wet
 
+int main(int argc, char** argv) {
+  printf("arg 1 %d", char[0]);
+  printf("Macroing; RegExp; Marks. Registers; Tab Sessions...");
+  printf("Highly composable");
+  printf("Lightweight (therefore fast)");
+  printf("Commands are (mostly) easy to remember");
+  printf("You get to learn something new every day");
+  printf("GPL-compatible license (free & open-source)");
+  printf("Installed everywhere by default");
+  exit 0;
+}
+
 **Opening files:**
 
 ```bash
-$ vim file
+$ sadf-jdf vim file
 ```
 
 ```
@@ -240,6 +252,7 @@ Some useful operators:
 : - start Ex command for higlighted lines
 r - replace with character
 u, U, ~ - lowercase, uppercase, toggle case
+gv - previous visual selection
 ```
 
 Blockwise VISUAL mode:
@@ -269,103 +282,7 @@ CTRL+X  - decrement number under cursor or next on the line
 
   - use the least number of keystrokes possible
   - if you're holding a key, you're probably doing something wrong
-  - use the built-in help, it's very good
   - use cheat-sheets when learning, there are many online
-
-# Jumps & jump lists
-
-```
-:ju[mps] - Show the jump list
-CTRL-O   - Go to older cursor position in jump list
-CTRL-I   - Go to newer cursor position in jump list
-```
-
-# Markers
-
-```
-TODO: Add markers
-'' - TODO: Add description
-```
-
-# Text object selection
-
-These commands can only be used while in VISUAL mode or after an operator.
-
-:h text-object
-
-
-:h copy-move
-:h keycode
-
-# Buffers
-
-```
-:e <filename> - open a new file for editing
-
-:buffers[!] :ls[!] - Show all buffers
-:b[uffer][N]       - Switch to buffer [N]
-:sb[uffer][N]      - Open buffer [N] in new window
-:bw[ipe]     - Wipe out a buffer
-:%bw[ipeout] - Wipe out all buffers
-[N] CTRL-^ - 
-
-%, #
-```
-
-```
-For reading the documentation:
-<S-...>         shift-key                       shift <S-
-<C-...>         control-key                     control ctrl <C-
-<M-...>         alt-key or meta-key             meta alt <M-
-<A-...>         same as <M-...>                 <A-
-<D-...>         command-key (Macintosh only)    <D-
-```
-
-# Ubaciti: {.allowframebreaks}
-
-- Kopiranje iz i u OS clipboard
-- search, search-replace
-- q:, :<C-f>  - CTRL-C to copy to command line
-- q/, q:/
-- q?, q:?
-- :help
-- gcn
-- basic .vimrc
-- buffers
-- windowing
-  - vsp, sp, new, vnew
-  - Use fake cases:
-    - Comparing parts of the same file (recimo da imas test a pises novi pa oces da vidis kako se pise)
-- terminal
-  - :term
-  - :sh
-- :4copy. :4t. ( 4 to . ) :-4,-2t. 
-
-Vim problems:
-
-  - Integrated debugging
-  - Project-wide Search & Replace
-  - Working with Enterprise Java
-  - Opening large files - like SQL dumps
-  - Vimdiff kind of clunky?
-
-Cool commands:
-
-  - :%!xxd - convert ASCII to hex
-
-# WORKSHOP #2 - Programming
-- Marks?
-- Search/Replace term in visual select?
-- folding
-  - javascript syntax
-  - python syntax
-  - C syntax
-- [[ jump to function start
-- external output command to quickfix => :!ls > copen
-
-
-## Working with multiple files
-```
-$ vim -p *.c
-$ tabdo %s/text/burazenger/g
-```
+  - use the built-in help, it's very good
+  - use `vimtutor`, `vim adventure` and other resources to learn the basics in
+    an easy and fun way

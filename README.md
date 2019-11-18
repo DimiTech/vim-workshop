@@ -19,6 +19,7 @@ $ sudo apt install entr
 ## Generate a PDF presentation
 
 ```
+make open
 make
 ```
 
@@ -32,8 +33,6 @@ make
 
 ### TODO: 
 ```
-? center images
 ? lower the font size
-? add a logo image
 ```
 

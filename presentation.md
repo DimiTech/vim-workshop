@@ -177,6 +177,7 @@ cw      - change until the end of word
 caw     - change a whole word
 ciw     - change a whole word (whithout whitespace)
 C, c$   - change to end of line
+cc      - change the entire line
 rc      - replace character under cursor with 'c'
 R       - replace by overwriting
 s       - substitute 1 character with string

@@ -36,3 +36,20 @@ make
 ? lower the font size
 ```
 
+### Add Commands: 
+```
+gu - lowercase selection
+gU - uppercase selection
+= - indent selection
++ - go to the beginning of the next line (3+)
+- - go to the beginning of the previous line (9-)
+gUaW - uppercase a word
+3$ - go to the end of 3rd line down
+
+g; - go to next change
+g, - Go to prev change
+
+For part 2:
+gf - go to file under cursor [ buffers ]
+gf - go to local definition [ buffers ]
+```
